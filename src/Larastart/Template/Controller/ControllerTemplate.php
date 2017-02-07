@@ -7,6 +7,7 @@
 
 namespace Larastart\Template\Controller;
 
+use Larastart\Utils\Helpers;
 use Larastart\Resource\Api\ApiInterface;
 use Larastart\Resource\Model\Column;
 use Larastart\Resource\Model\ModelInterface;
@@ -24,11 +25,7 @@ class ControllerTemplate extends TemplateAbstract
         $this->api             = $api;
         $this->model           = $model;
         $this->templatePath    = $templatePath ?: $this->defaultTemplatePath;
-        if (realpath($storagePath) === false) {
-            $this->storagePath = getcwd().DIRECTORY_SEPARATOR.$storagePath.$this->defaultStoragePath;
-        } else {
-            $this->storagePath = realpath($storagePath).$this->defaultStoragePath;
-        }
+        $this->storagePath     = Helpers::getStorage($storagePath, $this->defaultStoragePath);
 
         // Check prefix Or Namespace
         if ($api->getPrefix()) {

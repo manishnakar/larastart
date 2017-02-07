@@ -2,6 +2,7 @@
 
 namespace Larastart\Template\Seed;
 
+use Larastart\Utils\Helpers;
 use Larastart\Resource\Model\ModelInterface;
 use Larastart\Template\TemplateAbstract;
 
@@ -18,11 +19,7 @@ class SeedTemplate extends TemplateAbstract
         $this->source          = $source;
         $this->table           = ucfirst($table);
         $this->templatePath    = $templatePath ?: $this->defaultTemplatePath;
-        if (realpath($storagePath) === false) {
-            $this->storagePath = getcwd().DIRECTORY_SEPARATOR.$storagePath.$this->defaultStoragePath;
-        } else {
-            $this->storagePath = realpath($storagePath).$this->defaultStoragePath;
-        }
+        $this->storagePath     = Helpers::getStorage($storagePath, $this->defaultStoragePath);
         $this->storageFileName = $this->table.$this->suffix.".php";
     }
 

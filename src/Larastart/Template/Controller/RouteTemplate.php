@@ -7,6 +7,7 @@
 
 namespace Larastart\Template\Controller;
 
+use Larastart\Utils\Helpers;
 use Larastart\Resource\Model\ModelInterface;
 use Larastart\Resource\ResourceCollection;
 use Larastart\Template\TemplateAbstract;
@@ -21,12 +22,8 @@ class RouteTemplate extends TemplateAbstract
     {
         $this->resourceCollection  = $resourceCollection;
         $this->templatePath        = $templatePath ?: $this->defaultTemplatePath;
-        if (realpath($storagePath) === false) {
-            $this->storagePath = getcwd().DIRECTORY_SEPARATOR.$storagePath.$this->defaultStoragePath;
-        } else {
-            $this->storagePath = realpath($storagePath).$this->defaultStoragePath;
-        }
-        $this->storageFileName = $this->makeFileName();
+        $this->storagePath         = Helpers::getStorage($storagePath, $this->defaultStoragePath);
+        $this->storageFileName     = $this->makeFileName();
 
         // Create file header
         if (!file_exists($this->storagePath.DIRECTORY_SEPARATOR.$this->storageFileName)) {

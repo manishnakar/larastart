@@ -37,7 +37,7 @@ php bin/larastart make:model examples/resources/blog.json ../output_dir
 
 You can create seeds for you application.
 
-**Important:** The standard is csv file with comma as a separator.
+**Important:** The standard is csv file and fields in each record are delimited by comma.
 
 ```
 php bin/larastart make:seed author examples/resources/author.csv ../output_dir
@@ -54,22 +54,22 @@ You may pass as a resource argument a file or a directory with resource files.
 
 ## JSON
 Each Resource file, is composed by Resource Items, that are described by:
-- name
-- description
-- model
+-   name
+-   description
+-   model
 
 A **model** is composed by:
-- columns: (Mandatory)
-- _softDeletes: (Optional) The common softDeletes of Laravel;
-- _timestamps: (Optional) The common timestamps of Laravel;
-- _table: (Optional) The table name. If not setted, resource.name will be used;
-- _{relationship type}: (Optional) Example "_hasOne": "author". You can provide a list of "hasOne" relations or a string for just one;
+-   columns: (Mandatory)
+-   _softDeletes: (Optional) The common softDeletes of Laravel;
+-   _timestamps: (Optional) The common timestamps of Laravel;
+-   _table: (Optional) The table name. If not setted, resource.name will be used;
+-   _{relationship type}: (Optional) Example "_hasOne": "author". You can provide a list of "hasOne" relations or a string for just one;
 
 A **column** is composed by:
-- type: (Mandatory) All of the Laravel's column type. Ex: increments, integer, string, text, etc;
-- name: (Mandatory) The column name
-- length: (Optional) Used as column length in some of the available types;
-- _unsigned: (Optional) To describe a column as unsigned;
-- _index: (Optional) To add an index on this column. If a string is given it will be the index name. If boolean is given the index name will be automatically generated. If array of strings is given it will generate a compound index of the provided column names
+-   type: (Mandatory) All of the Laravel's column type. Ex: increments, integer, string, text, etc;
+-   name: (Mandatory) The column name
+-   length: (Optional) Used as column length in some of the available types;
+-   _unsigned: (Optional) To describe a column as unsigned;
+-   _index: (Optional) To add an index on this column. If a string is given it will be the index name. If boolean is given the index name will be automatically generated. If array of strings is given it will generate a compound index of the provided column names
 
 ### Resource example for a Blog Application [blog.json](https://github.com/ajaaleixo/larastart/blob/master/examples/resources/blog.json)

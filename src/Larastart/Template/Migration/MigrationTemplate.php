@@ -7,6 +7,7 @@
 
 namespace Larastart\Template\Migration;
 
+use Larastart\Utils\Helpers;
 use Larastart\Resource\Model\Column;
 use Larastart\Resource\Model\ModelInterface;
 use Larastart\Template\TemplateAbstract;
@@ -22,11 +23,7 @@ class MigrationTemplate extends TemplateAbstract
     {
         $this->model           = $model;
         $this->templatePath    = $templatePath ?: $this->defaultTemplatePath;
-        if (realpath($storagePath) === false) {
-            $this->storagePath = getcwd().DIRECTORY_SEPARATOR.$storagePath.$this->defaultStoragePath;
-        } else {
-            $this->storagePath = realpath($storagePath).$this->defaultStoragePath;
-        }
+        $this->storagePath     = Helpers::getStorage($storagePath, $this->defaultStoragePath);
         $this->storageFileName = $this->makeFileName($model);
     }
 
